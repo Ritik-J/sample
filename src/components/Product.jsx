@@ -1,7 +1,10 @@
 import React from "react";
 import { Products } from "../data";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addToCart, selectCartItems } from "../redux/slice/cartSlice";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Product = () => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItems);
@@ -9,10 +12,21 @@ const Product = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
-    console.log(handleAddToCart);
+    toast.success("Item Added To Cart", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   };
   return (
     <div>
+      <ToastContainer />
       <div className="container">
         <div className="row">
           {Products.map((item) => (
